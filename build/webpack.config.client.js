@@ -62,7 +62,7 @@ if (isDev) {
     devServer,
     plugins: defaultPlugins.concat([
       new webpack.HotModuleReplacementPlugin(),// 热更新
-      new webpack.NoEmitOnErrorsPlugin()// 避免展示一些不必要的信息的插件
+      // new webpack.NoEmitOnErrorsPlugin()// 避免展示一些不必要的信息的插件,webpack4 已取消
     ])
   })
 } else {
@@ -77,11 +77,12 @@ if (isDev) {
       minSize: 0,
       name: 'vendor',
       minChunks: 1,
-    }
+    },
+    runtimeChunk: true  //
   },
   // 区别
   // hash: 所有打包出来的每个模块都是同一个hash，是整个应用的一个hash
-  // chunkhash: chunk：可以理解为在entry中声明的节点，当异步加载模块时，每个异步模块都是chunk，chunkhas就是说每个模块单独生成一个hash 
+  // chunkhash: chunk：可以理解为在entry中声明的节点，当异步加载模块时，每个异步模块都是chunk，chunkhas就是说每个模块单独生成一个hash
   output: {
     filename: '[name].[chunkhash:8].js'
   },
@@ -105,7 +106,7 @@ if (isDev) {
         })
       }
     ]
-  },  
+  },
   plugins: defaultPlugins.concat([
     // 因为webpack 4 包含了contenthash 这个关键字段，所以在extractPlugin 中不能使用contenthash字段
     new ExtractPlugin('styles.[md5:contenthash:hex:8].css'), // 根据内容进行hash，生成一个单独的值

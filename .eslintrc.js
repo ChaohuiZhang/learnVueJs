@@ -16,10 +16,11 @@ module.exports = {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "parser": "babel-eslint",   // 
+    "parser": "babel-eslint",   //
     "plugins": [
         "vue"
     ],
     "rules": {
+      "no-new": "off" // 去掉某个规则
     }
 };

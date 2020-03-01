@@ -9,6 +9,7 @@ const createVueloaderConfig = require('./vue-loader.config')
 const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
+    mode: process.env.NODE_ENV || "production", // webpack 4.0 自动优化
     target: 'web',
     entry: path.join(__dirname, '../client/index.js'),
     output: {
@@ -40,7 +41,7 @@ const config = {
                         loader: 'url-loader',//把图片转换为base64代码，直接写到HTML文件里面，不用生成新的文件，减少HTTP请求
                                             // url-loader 封装了一下file-loader，
                         options: { // 传一些参数给loader，指定处理方式
-                            limit: 1024, // 
+                            limit: 1024, //
                             name: 'resources/[path][name]-[hash:8].[ext]' // 指定输出名字和路径   []表示是一个变量
                         }
                     }
